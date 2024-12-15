@@ -30,7 +30,7 @@ export default function Home() {
                         onClick={handleToPageInfant}
                     >
                         <Image src="/infant-icon.png" width={50} height={50} alt="" />
-                        <p className="">Trẻ ốm (dưới 2 tháng tuổi)</p>
+                        <p className="">Trẻ ốm (từ 2 tháng đến 12 tháng)</p>
                     </button>
 
                     <button
@@ -38,7 +38,7 @@ export default function Home() {
                         className="w-1/2 max-w-[300px] min-h-[150px] flex flex-col items-center justify-center border rounded-lg bg-white p-4 cursor-pointer gap-4 h-full"
                     >
                         <Image src="/children-icon.png" width={50} height={50} alt="" />
-                        <p className="">Trẻ ốm (từ 2 tháng đến 5 tuổi)</p>
+                        <p className="">Trẻ ốm (từ 12 tháng đến 5 tuổi)</p>
                     </button>
                 </div>
             </div>

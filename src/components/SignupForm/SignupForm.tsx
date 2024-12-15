@@ -106,7 +106,7 @@ export default function SignUp() {
             <p className="mt-4">
                 Đã có tài khoản.{' '}
                 <span
-                    className="font-black"
+                    className="font-black hover:cursor-pointer"
                     onClick={() => {
                         router.push('/login');
                     }}

@@ -55,7 +55,7 @@ export default function LoginForm() {
             <p className="mt-4">
                 Chưa có tài khoản.{' '}
                 <span
-                    className="font-black"
+                    className="font-black hover:cursor-pointer"
                     onClick={() => {
                         router.push('/signup');
                     }}
