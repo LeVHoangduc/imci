@@ -1,0 +1,36 @@
+{
+    "users": [
+        {
+            "id": "7cb0",
+            "name": "Thuan Nguyen",
+            "username": "thuan22",
+            "phone": "1234567890",
+            "password": "thuan987",
+            "citizenId": "123456789000"
+        },
+        {
+            "id": "66ea",
+            "name": "Tiến Lê",
+            "username": "tienle123",
+            "phone": "0905132122",
+            "password": "12345678a",
+            "citizenId": "123456789000"
+        },
+        {
+            "id": "6e46",
+            "name": "Tuấn Trần",
+            "username": "tuan1234",
+            "phone": "1234567890",
+            "password": "thuan987",
+            "citizenId": "123456789000"
+        },
+        {
+            "id": "7a80",
+            "name": "tien le",
+            "username": "tienle98",
+            "phone": "1111111111",
+            "password": "12345678a",
+            "citizenId": "123456789000"
+        }
+    ]
+}
