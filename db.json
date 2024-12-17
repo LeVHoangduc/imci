@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "cfda",
+      "name": "Tien Le",
+      "username": "tienle123",
+      "phone": "0905123123",
+      "password": "12345678",
+      "citizenId": "123123123123"
+    },
+    {
+      "id": "9718",
+      "name": "Duc Le",
+      "username": "ducle123",
+      "phone": "0905123456",
+      "password": "12345678",
+      "citizenId": "111222333444"
+    }
+  ]
+}
