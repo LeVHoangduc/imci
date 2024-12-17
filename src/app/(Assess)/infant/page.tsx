@@ -1,8 +1,14 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/provider/AuthProvider';
 
 const InfantPage = () => {
     const router = useRouter();
+    const { isLoggedIn } = useAuth();
+    if (isLoggedIn === false) {
+        router.push('/');
+    }
+
     const childData = [
         { id: 'ho', title: 'Ho' },
         { id: 'tieuchay', title: 'Tiêu chảy' },

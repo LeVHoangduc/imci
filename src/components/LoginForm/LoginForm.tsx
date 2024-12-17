@@ -18,7 +18,9 @@ export default function LoginForm() {
         e.preventDefault();
 
         try {
-            const res = await axios.get(`http://localhost:5000/users?identifier=${identifier}&password=${password}`);
+            const res = await axios.get(
+                `https://imci-db.onrender.com/users?identifier=${identifier}&password=${password}`
+            );
             const user = res.data.find((user: IUser) => user.username === identifier && user.password === password);
             if (res.data.length > 0) {
                 toast.success('Đăng nhập thành công!');

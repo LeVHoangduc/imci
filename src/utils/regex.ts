@@ -9,8 +9,8 @@ export const validatePhone = (phone: string) => {
 };
 
 export const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    return passwordRegex.test(password) ? '' : 'Phải chứa ít nhất 8 ký tự, bao gồm chữ cái và số.';
+    const passwordRegex = /^.{8,}$/;
+    return passwordRegex.test(password) ? '' : 'Mật khẩu phải từ 8 ký tự trở lên.';
 };
 
 export const validateCitizenId = (citizenId: string) => {

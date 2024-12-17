@@ -44,7 +44,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col w-full">
-                <h2 className="font-bold text-gray-500">Settings</h2>
+                <h2 className="font-bold text-gray-500">CÀI ĐẶT</h2>
                 <div className="mt-5 flex w-full gap-4">
                     <button
                         type="button"

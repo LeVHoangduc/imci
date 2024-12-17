@@ -42,7 +42,7 @@ export default function SignUp() {
         }
 
         try {
-            const res = await axios.post('http://localhost:5000/users', {
+            const res = await axios.post('https://imci-db.onrender.com/users', {
                 name,
                 username,
                 phone,
