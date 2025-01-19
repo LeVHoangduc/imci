@@ -14,7 +14,7 @@ export default function Home() {
         if (isLoggedIn) {
             router.push('/infant');
         } else {
-            toast.success('Vui lòng đăng nhập');
+            toast.warning('Vui lòng đăng nhập');
             router.push('/login');
         }
     };
