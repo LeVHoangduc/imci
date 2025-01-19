@@ -35,10 +35,11 @@ export default function Home() {
 
                     <button
                         type="button"
-                        className="w-1/2 max-w-[300px] min-h-[150px] flex flex-col items-center justify-center border rounded-lg bg-white p-4 cursor-pointer gap-4 h-full"
+                        className="w-1/2 max-w-[300px] min-h-[150px] flex flex-col items-center justify-center border rounded-lg bg-white p-4 gap-4 h-full opacity-40 hover:cursor-default"
                     >
                         <Image src="/children-icon.png" width={50} height={50} alt="" />
                         <p className="">Trẻ ốm (từ 12 tháng đến 5 tuổi)</p>
+                        <p>Tính năng đang phát triển</p>
                     </button>
                 </div>
             </div>
@@ -48,18 +49,20 @@ export default function Home() {
                 <div className="mt-5 flex w-full gap-4">
                     <button
                         type="button"
-                        className="w-1/2 flex flex-col items-center justify-center border rounded-lg bg-white p-4 cursor-pointer gap-4 h-full max-w-[300px] min-h-[150px]"
+                        className="w-1/2 flex flex-col items-center justify-center border rounded-lg bg-white p-4 gap-4 h-full max-w-[300px] min-h-[150px] opacity-40 hover:cursor-default"
                     >
                         <Image src="/theme-icon.png" width={50} height={50} alt="" />
                         <p className="">App Theme</p>
+                        <p>Tính năng đang phát triển</p>
                     </button>
 
                     <button
                         type="button"
-                        className="w-1/2 flex flex-col items-center justify-center border rounded-lg bg-white p-4 cursor-pointer gap-4 h-full max-w-[300px] min-h-[150px]"
+                        className="w-1/2 flex flex-col items-center justify-center border rounded-lg bg-white p-4  gap-4 h-full max-w-[300px] min-h-[150px] opacity-40 hover:cursor-default"
                     >
                         <Image src="/children-icon.png" width={50} height={50} alt="" />
                         <p className="">About</p>
+                        <p>Tính năng đang phát triển</p>
                     </button>
                 </div>
             </div>

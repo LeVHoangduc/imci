@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,34 +8,56 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/provider/AuthProvider';
 import { IUser } from '@/utils/type';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://imci-db.onrender.com';
+
 export default function LoginForm() {
-    const [identifier, setIdentifier] = useState('');
-    const [password, setPassword] = useState('');
+    const [credentials, setCredentials] = useState({ identifier: '', password: '' });
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const { login } = useAuth();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setCredentials(prev => ({ ...prev, [name]: value }));
+    }, []);
 
-        try {
-            const res = await axios.get(
-                `https://imci-db.onrender.com/users?identifier=${identifier}&password=${password}`
-            );
-            const user = res.data.find((user: IUser) => user.username === identifier && user.password === password);
-            if (res.data.length > 0) {
-                toast.success('Đăng nhập thành công!');
-                login(user.name);
-                setTimeout(() => {
+    const handleSubmit = useCallback(
+        async (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            setIsLoading(true);
+
+            try {
+                // Sử dụng GET với query parameters như ban đầu
+                const res = await axios.get(`${API_BASE_URL}/users`, {
+                    params: {
+                        identifier: credentials.identifier,
+                        password: credentials.password,
+                    },
+                });
+
+                const user = res.data.find(
+                    (user: IUser) => user.username === credentials.identifier && user.password === credentials.password
+                );
+                if (user) {
+                    toast.success('Đăng nhập thành công!');
+                    login(user.name);
                     router.push('/');
-                }, 1000);
-            } else {
-                toast.error('Tài khoản hoặc mật khẩu không đúng!');
+                } else {
+                    toast.error('Tài khoản hoặc mật khẩu không đúng!');
+                }
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    const message = error.response?.data?.message || error.message;
+                    toast.error(`Đăng nhập thất bại: ${message}`);
+                } else {
+                    toast.error('Đăng nhập thất bại: Lỗi không xác định');
+                }
+            } finally {
+                setIsLoading(false);
             }
-        } catch (error) {
-            const errorMessage = axios.isAxiosError(error) ? error.message : String(error);
-            toast.error('Đăng nhập thất bại: ' + errorMessage);
-        }
-    };
+        },
+        [credentials, login, router]
+    );
 
     return (
         <form
@@ -45,23 +67,32 @@ export default function LoginForm() {
             <InputField
                 label="Tên người dùng hoặc Số điện thoại"
                 type="text"
-                value={identifier}
-                onChange={setIdentifier}
+                name="identifier"
+                value={credentials.identifier}
+                onChange={handleChange}
                 required
             />
-            <InputField label="Mật khẩu" type="password" value={password} onChange={setPassword} required />
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
-                Đăng nhập
+            <InputField
+                label="Mật khẩu"
+                type="password"
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
+                required
+            />
+            <button
+                type="submit"
+                className={`w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 ${
+                    isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                disabled={isLoading}
+            >
+                {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
             </button>
 
             <p className="mt-4">
                 Chưa có tài khoản.{' '}
-                <span
-                    className="font-black hover:cursor-pointer"
-                    onClick={() => {
-                        router.push('/signup');
-                    }}
-                >
+                <span className="font-black hover:cursor-pointer text-blue-600" onClick={() => router.push('/signup')}>
                     Đăng ký
                 </span>
             </p>
@@ -72,21 +103,25 @@ export default function LoginForm() {
 interface InputFieldProps {
     label: string;
     type: string;
+    name: string;
     value: string;
-    onChange: (value: string) => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ label, type, value, onChange, required = false }) => (
+const InputField: React.FC<InputFieldProps> = ({ label, type, name, value, onChange, required = false }) => (
     <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2">{label}:</label>
+        <label htmlFor={name} className="block text-gray-700 font-bold mb-2">
+            {label}:
+        </label>
         <input
-            title="input"
+            id={name}
+            name={name}
             type={type}
             value={value}
-            onChange={e => onChange(e.target.value)}
+            onChange={onChange}
             required={required}
-            className="w-full px-3 py-2 border rounded-md border-gray-300"
+            className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
     </div>
 );

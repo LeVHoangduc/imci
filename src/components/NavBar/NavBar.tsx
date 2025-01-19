@@ -14,7 +14,7 @@ const NavBar = () => {
 
     return (
         <div className="flex w-full p-4 bg-[#03DAC5] justify-between items-center">
-            <div className="flex gap-5 items-center">
+            <div className="flex gap-5 items-center hover:cursor-pointer">
                 {pathname === '/' && <Image src="/logo.png" width={40} height={40} alt="logo" />}
 
                 {pathname !== '/' && <ArrowLeft onClick={() => router.back()} />}
